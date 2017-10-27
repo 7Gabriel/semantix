@@ -31,7 +31,7 @@ spark-submit nomeprograma.py
 Respostas 
 
 Qual o objtivo do comando cache em Spark?
-Armazena os objetos na memória para usopara que sejam acessados mas rapidamente.
+Armazena os objetos na memória para usopara que sejam acessados mais rapidamente.
 
 O mesmo código implementado em Spark é normalmente mais rápido que a implementação equivalente em
 MapReduce. Por quê?
