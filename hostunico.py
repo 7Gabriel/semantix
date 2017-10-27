@@ -36,7 +36,7 @@ def parseLogLinhaNasa(linha):
         timestamp     = parseLogData(match.group(4)),
         path          = match.group(6),
         status = int(match.group(8)),
-        content_size  = size	
+        contentSize  = size	
     ), 1)
 
 
@@ -44,26 +44,26 @@ def parseDeLogs():
     conf = SparkConf().setMaster("local").setAppName("NumeroHostUnicos")
     sc = SparkContext(conf = conf)
     
-    convertido_logs = (sc.textFile("hdfs://quickstart/user/semantix/NASA_ACCESS_LOG_TOTAL").map(parseLogLinhaNasa).cache())
+    convertidoLogs = (sc.textFile("hdfs://quickstart/user/semantix/NASA_ACCESS_LOG_TOTAL").map(parseLogLinhaNasa).cache())
 
     # Separa os logs completos de linhas incompletas
-    dados_logs = (convertido_logs.filter(lambda log: log[1] == 1).map(lambda log: log[0]).cache())
+    dadosLogs = (convertidoLogs.filter(lambda log: log[1] == 1).map(lambda log: log[0]).cache())
 
-    erro_logs = (convertido_logs.filter(lambda log: log[1] == 0).map(lambda log: log[0]))
-    erro_logs_count = erro_logs.count()
+    erroLogs = (convertidoLogs.filter(lambda log: log[1] == 0).map(lambda log: log[0]))
+    erroLogCount = erroLogs.count()
    
-    if erro_logs_count > 0:
-        print 'Numero de linhas invalidas no log: %d' % erro_logs.count()
-        for linha in erro_logs.take(20):
+    if erroLogCount > 0:
+        print 'Numero de linhas invalidas no log: %d' % erroLogs.count()
+        for linha in erroLogs.take(20):
             print 'Linha Invalida: %s' % linha
 
-    print 'Total de linhas lidas %d, Total de linhas convertidas com sucesso %d, Total de falhas na conversao %d' % (convertido_logs.count(), dados_logs.count(), erro_logs.count())
-    return dados_logs
+    print 'Total de linhas lidas %d, Total de linhas convertidas com sucesso %d, Total de falhas na conversao %d' % (convertidoLogs.count(), dadosLogs.count(), erroLogs.count())
+    return dadosLogs
 
 if __name__ == "__main__":
 
-    dados_logs = parseDeLogs()
-    hosts = dados_logs.map(lambda log: log.host).distinct().count()
+    dadosLogs = parseDeLogs()
+    hosts = dadosLogs.map(lambda log: log.host).distinct().count()
     print 'Numero de hosts unicos: %d' % hosts
 
 
