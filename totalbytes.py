@@ -36,7 +36,7 @@ def parseLogLinhaNasa(linha):
     else:
         size = long(match.group(9))
     return (Row(
-		host          = match.group(1),
+	host          = match.group(1),
         timestamp     = parseLogData(match.group(4)),
         path          = match.group(6),
         status = int(match.group(8)),
