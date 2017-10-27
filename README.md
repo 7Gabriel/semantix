@@ -51,7 +51,7 @@ Explique com suas palavras o que é Resilient Distributed Datasets (RDD)
  
  Explique o que o código Scala abaixo faz
  
- Lê um arquivo do HDFS no hadoop e cria um RDD chamado textFile, em seguida faz uma tranformação dos dados para gerar uma contagem de palavras,
+ Lê um arquivo do HDFS no hadoop e cria um RDD chamado textFile, em seguida faz uma transformação dos dados para gerar uma contagem de palavras,
  e por fim salva o resultado no HDFS. 
 
 
