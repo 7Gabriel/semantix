@@ -52,11 +52,11 @@ def parseDeLogs():
     erroLogCount = erroLogs.count()
    
     if erroLogCount > 0:
-        print 'Numero de linhas invalidas no log: %d' % erroLogs.count()
+        print ('Numero de linhas invalidas no log: %d' % erroLogs.count())
         for linha in erroLogs.take(20):
-            print 'Linha Invalida: %s' % linha
+            print ('Linha Invalida: %s' % linha)
 
-    print 'Total de linhas lidas %d, Total de linhas convertidas com sucesso %d, Total de falhas na conversao %d' % (convertidoLogs.count(), dadosLogs.count(), erroLogs.count())
+    print ('Total de linhas lidas %d, Total de linhas convertidas com sucesso %d, Total de falhas na conversao %d' % (convertidoLogs.count(), dadosLogs.count(), erroLogs.count()))
     return dadosLogs
 
 if __name__ == "__main__":
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     dadosLogs = parseDeLogs()
 
     registroErro = dadosLogs.filter(lambda log: log.status==404).cache()
-    print 'Total de erros 404: %d' % registroErro.count()
+    print ('Total de erros 404: %d' % registroErro.count())
 
 
 
